@@ -7,57 +7,43 @@
 
     <style>
 
-        body{
-            margin:0;
-            background-color: aquamarine;
-        }
-
         #div1{
-            width: 30%;
+            width: 40%;
             height: auto;
-            background-color: lightgray;
-            position: absolute;
-            border-radius: 10px;
-            left: 35%;
-            top: 25%;
+            position: relative;
+            left: 450px;
+            top: 150px;
         }
-        #vize1{
+        #saat{
             width: 150px;
-            height: 30px;
-            margin-left: 40px;
-            margin-top: 20px;
-
-           
-        }
-        #vize2{
-            width: 150px;
-            height: 30px;
-            margin-left:40px;
-            margin-top: 20px;
-
-        }
-        #final{
-            width: 150px;
-            height: 30px;
-            margin-left:50px;
-            margin-top: 20px;
-            }
-        #btn{
-            width: 250px;
-            height: 30px;
-            margin-left:73px;
-            margin-bottom: 10px;
-            
-        }
-        #div2{
-            width: 50px;
-            height: 50px;
+            height: 150px;
             background-color: white;
-            margin: auto;
-            display: none;
-            font-size:32px ;
-            text-align: center;
-            color: white;
+            float: left;
+            margin-left:4px;
+            font-size:128px ;
+            text-align:center ;
+        }
+        #dakika{
+            width: 150px;
+            height: 150px;
+            background-color: white;
+            float: left;
+            margin-left:4px;
+            font-size:128px ;
+            text-align:center ;
+
+        }
+        #saniye{
+            width: 150px;
+            height: 150px;
+            background-color: white;
+            float: left;
+            margin-left:4px;
+            font-size:128px ;
+            text-align:center ;
+        }
+        body{
+            background-color: green;
         }
 
     </style>
@@ -65,80 +51,51 @@
 </head>
 <body>
     <div id="div1">
-        <label style="margin-left: 60px" for="kullaniciAdi"> Vize 1 :</label>
-        <input id="vize1" type="text"/>
-        <br/>
-        <label style="margin-left: 60px" for="parola">Vize 2 :</label>
-        <input id="vize2" type="text"/>
-        <br/>
-        <label style="margin-left: 60px" for="parola">Final :</label>
-        <input id="final" type="text"/>
-        <br/><br/>
+        <div class="deneme" id="saat"></div>
 
-        <div id="div2"></div>
-        <br/> <br/>
-        <button onclick="yazdir()" id="btn">Hesapla</button>
+        <div class="deneme" id="dakika"></div>
+
+        <div class="deneme" id="saniye"></div>
+
     </div>
 
     <script>
 
-        var vize1,vize2,final,ortalama;
+        var saat = prompt("Saat",0);
+        var dakika = prompt("Dakika",0);
+        var saniye = prompt("Saniye", 0);
 
-        function hesapla() {
+        var a = setInterval(function(){
+        
+            document.getElementById("saat").innerHTML = saat;
+            document.getElementById("dakika").innerHTML = dakika;
+            document.getElementById("saniye").innerHTML = saniye--;
 
-            vize1 = document.getElementById("vize1").value;
-            vize2 = document.getElementById("vize2").value;
-            final = document.getElementById("final").value;
+            if(Number(document.getElementById("dakika").innerHTML) == -1){
+                dakika--;
+                saniye = 59;
+            
+            }
+        
+            if(Number(document.getElementById("dakika").innerHTML) == 0 &&
+              Number(document.getElementById("saniye").innerHTML) == 0) {
 
-            ortalama = (vize1 * 0.3) +(vize2 * 0.3) + (final * 0.4);
-
-            return ortalama;
-        }
-
-        function harfNotu() {
-            var ort = hesapla();
-
-            if(ort > 90) {
-
-                return "AA";
-            }
-            else if(ort > 85) {
-                return "BA";
-            }
-            else if(ort > 80) {
-                return "BB";
-            }
-            else if(ort > 70) {
-                return "CB";
-            }
-            else if(ort > 60) {
-                return "CC";
-            }
-            else if(ort > 50) {
-                return "DC";
-            }
-            else if(ort > 40) {
-                return "DD";
-            }
-            else {
-                return "FF";
+                saat--;
+                dakika=59;
             }
 
-        }
+            if(Number(document.getElementById("saat").innerHTML)== 0 &&
+               Number(document.getElementById("dakika").innerHTML) == 0 &&
+               Number(document.getElementById("saniye").innerHTML) == 0) { 
 
-        function yazdir() {
+                  for(i = 0; i <3; i++){
+                      document.getElementsByClassName("deneme")[i].style.backgroundColor = "red";
+                  }
 
-            document.getElementById("div2").style.display = "block";
-            document.getElementById("div2").innerHTML = harfNotu();
-
-            if (harfNotu() == "FF") {
-                document.getElementById("div2").style.backgroundColor ="red";
+                clearInterval(a);
             }
-            else {
-                document.getElementById("div2").style.backgroundColor ="green";
 
-            }
-        }
+        },1000);
 
     </script>
 
